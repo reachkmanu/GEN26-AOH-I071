@@ -2,7 +2,7 @@
 
 ## GEN26-A0H-I071
 ### Team Details 
-#### **Team Name** Optimus Prime <br/>
+#### **Team Name**: Optimus Prime <br/>
 #### Team Members
 |         Role    |         👤 Name         |   🎓 Roll Number      |     ⚧️ Gender   |    🏫 Department / Programme   | Hosteller/Day scholar  |
 |:---------------:|:------------------------|:----------------------:|:---------------:|:-------------------------------:|:---------------------------:|
