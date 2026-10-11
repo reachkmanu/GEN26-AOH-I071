@@ -1,0 +1,490 @@
+\documentclass[9pt]{beamer}
+\mode<presentation>
+
+% ============================================================
+% GENESIS IDEATHON: FINAL PRESENTATION
+% Team: Optimus Prime (Domain #2)
+% Problem: Thermally-Managed Solid-State Battery Module
+%          with Embedded Micro-Sensors
+% Setup section kept from the provided template.
+% ============================================================
+
+% -------------------- THEME AND COLOURS ---------------------
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{structurebold}
+\setbeamercovered{invisible}
+\setbeamertemplate{navigation symbols}{}
+
+% Genesis green palette
+\definecolor{GenesisGreen}{RGB}{35,105,70}
+\definecolor{GenesisDarkGreen}{RGB}{22,75,51}
+\definecolor{GenesisLightGreen}{RGB}{225,241,231}
+\definecolor{GenesisCream}{RGB}{250,248,240}
+
+% Apply the Genesis palette to Beamer elements
+\setbeamercolor{structure}{fg=GenesisGreen}
+\setbeamercolor{palette primary}{bg=GenesisDarkGreen,fg=white}
+\setbeamercolor{palette secondary}{bg=GenesisGreen,fg=white}
+\setbeamercolor{palette tertiary}{bg=GenesisDarkGreen,fg=white}
+\setbeamercolor{palette quaternary}{bg=GenesisGreen,fg=white}
+\setbeamercolor{frametitle}{bg=GenesisLightGreen,fg=GenesisDarkGreen}
+\setbeamercolor{title}{fg=GenesisDarkGreen}
+\setbeamercolor{block title}{bg=GenesisGreen,fg=white}
+\setbeamercolor{block body}{bg=GenesisLightGreen,fg=black}
+\setbeamercolor{item}{fg=GenesisGreen}
+\setbeamercolor{section in toc}{fg=GenesisDarkGreen}
+\setbeamercolor{subsection in toc}{fg=GenesisGreen}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{author in head/foot}{bg=GenesisLightGreen,fg=GenesisDarkGreen}
+\setbeamercolor{date in head/foot}{bg=GenesisLightGreen,fg=GenesisDarkGreen}
+
+% ------------------------- PACKAGES -------------------------
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{array}
+\usepackage{colortbl}
+
+% ---------------------- LAYOUT TUNING -----------------------
+\newlength{\GenesisMargin}
+\setlength{\GenesisMargin}{0.9cm}
+\setbeamersize{text margin left=\GenesisMargin,text margin right=\GenesisMargin}
+
+% Comfortable line and paragraph spacing
+\linespread{1.12}
+\setlength{\parskip}{0pt}
+
+% Bullets: clean markers and more space between items
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setlength{\leftmargini}{1.4em}
+\makeatletter
+\def\@listi{\leftmargin\leftmargini
+  \topsep 6pt plus 2pt minus 2pt
+  \parsep 0pt
+  \itemsep 10pt plus 3pt minus 3pt}
+\let\@listI\@listi
+\makeatother
+
+% Rounded blocks (used for highlighted content)
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+
+% Frame title: fixed-height band with an accent rule.
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.58cm,dp=0.3cm,leftskip=\GenesisMargin]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.4pt,dp=0pt]{palette secondary}\end{beamercolorbox}%
+}
+
+% Numbered entries in the outline
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamerfont{section in toc}{size=\normalsize,series=\mdseries}
+
+% --------------------- TEAM INFORMATION ---------------------
+% These appear in the footer of content slides.
+\newcommand{\TeamNumber}{I071}
+\newcommand{\TeamName}{Optimus Prime}
+
+% ------------------------- FOOTER ---------------------------
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.72\paperwidth,ht=3.0ex,dp=1.3ex,leftskip=\GenesisMargin]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\TeamNumber\ \textbar\ \TeamName
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.28\paperwidth,ht=3.0ex,dp=1.3ex,rightskip=\GenesisMargin]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\hfill\insertdate
+    \end{beamercolorbox}%
+  }%
+}
+
+% ---------------- PRESENTATION DETAILS ---------------------
+\title[Genesis Ideathon]{Thermally-Managed Solid-State Battery Module with Embedded Micro-Sensors}
+\author{Team ID: I071\\[0.2cm]
+Team Name: Optimus Prime\\[0.2cm]
+Domain: \#2 -- Energy, Mobility and Smart Infrastructure}
+\institute{Amrita Vishwa Vidyapeetham, Coimbatore Campus}
+\date{11th October 2026}
+
+% -------------------------- LOGOS --------------------------
+\newcommand{\GenesisTitleLogo}[2][1.35cm]{%
+  \raisebox{-0.5\height}{\includegraphics[height=#1]{#2}}}
+\titlegraphic{%
+  \GenesisTitleLogo{reference_logos/Amrita_Vishwa_Vidyapeetham_Logo.png}%
+  \hspace{0.7cm}%
+  \GenesisTitleLogo[1.0cm]{reference_logos/iic_logo.png}%
+  \hspace{0.7cm}%
+  \GenesisTitleLogo[1.0cm]{reference_logos/genesis-iic.png}%
+}
+
+% Genesis logo at the top-right of content slides only.
+\newcommand{\GenesisCornerLogo}{%
+  \begin{textblock*}{3cm}(\dimexpr\paperwidth-3cm-\GenesisMargin\relax,0.12cm)
+    \raggedleft\includegraphics[height=0.64cm]{reference_logos/genesis-iic.png}
+  \end{textblock*}%
+}
+
+% Title page template.
+\setbeamertemplate{title page}{%
+  \begin{textblock*}{\paperwidth}(0cm,0cm)
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.16cm,dp=0pt]{palette primary}\end{beamercolorbox}
+  \end{textblock*}%
+  \begin{minipage}[t][0.9\textheight][t]{\textwidth}
+    \vspace*{0.45cm}
+    \begin{center}
+      \inserttitlegraphic
+    \end{center}
+    \vspace{0.1cm}
+    {\color{GenesisLightGreen}\rule{\textwidth}{1.2pt}\par}
+    \vspace{0.3cm}
+    \raggedright
+    {\color{GenesisGreen}\rule{0.22\textwidth}{2.5pt}\par}
+    \vspace{0.25cm}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\LARGE\bfseries\inserttitle\par}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+      \node[fill=GenesisLightGreen,rounded corners=4pt,inner sep=0.35cm,
+            text width=\dimexpr\textwidth-0.7cm\relax,align=left,
+            font=\large] (card) {\insertauthor};
+      \fill[GenesisGreen,rounded corners=1.5pt]
+        ([xshift=0pt]card.north west) rectangle ([xshift=3pt]card.south west);
+    \end{tikzpicture}\par
+    \vspace{0.45cm}
+    {\normalsize{\color{GenesisDarkGreen}\insertinstitute}\hfill\textbf{Date:} \insertdate\par}
+  \end{minipage}%
+}
+
+% ------------------------- TABLES ---------------------------
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcommand{\GenesisHeadRow}{\rowcolor{GenesisGreen}}
+\newcommand{\GenesisHead}[1]{\textcolor{white}{\textbf{#1}}}
+\newcommand{\GenesisRowA}{\rowcolor{GenesisLightGreen}}
+\newcommand{\GenesisRowB}{\rowcolor{GenesisLightGreen!40}}
+\newenvironment{GenesisTable}[1]{%
+  \begin{center}
+  \renewcommand{\arraystretch}{1.9}%
+  \setlength{\tabcolsep}{4pt}%
+  \arrayrulecolor{white}\setlength{\arrayrulewidth}{1.2pt}%
+  \begin{tabular}{#1}}{%
+  \end{tabular}
+  \end{center}}
+
+% Highlight card for the Yukti ID on the last slide.
+\newcommand{\GenesisIDCard}[2]{%
+  \begin{tikzpicture}
+    \node[fill=white,draw=GenesisGreen,line width=1.2pt,rounded corners=6pt,
+          minimum width=7.6cm,minimum height=2.3cm,align=center,
+          text=GenesisDarkGreen,font=\Huge\bfseries] (id) {#2};
+    \node[fill=GenesisGreen,text=white,rounded corners=4pt,
+          inner xsep=0.45cm,inner ysep=0.14cm,font=\normalsize\bfseries]
+          at (id.north) {#1};
+  \end{tikzpicture}%
+}
+
+% Placeholder box for the architecture / use-case diagram.
+\newcommand{\GenesisDiagramBox}[1]{%
+  \begin{tikzpicture}
+    \node[draw=GenesisGreen,dashed,line width=0.8pt,rounded corners=4pt,
+          fill=GenesisLightGreen!45,text=GenesisDarkGreen,
+          text width=0.86\textwidth,minimum height=2.9cm,align=center,
+          inner sep=6pt]{#1};
+  \end{tikzpicture}%
+}
+
+% Inline source attribution (kept in-text; no separate references slide).
+\newcommand{\src}[1]{{\footnotesize(#1)}}
+
+% ============================================================
+% DOCUMENT START
+% ============================================================
+\begin{document}
+
+% ------------------------- TITLE SLIDE ----------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ------------------------- OUTLINE --------------------------
+{
+\setbeamertemplate{footline}{}
+\begin{frame}{Presentation Outline}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \tableofcontents[sections={1-6}]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \tableofcontents[sections={7-12}]
+    \end{column}
+  \end{columns}
+\end{frame}
+}
+
+% ============================================================
+% SLIDE 1: PROBLEM STATEMENT
+% ============================================================
+\section{Problem Statement}
+\begin{frame}{Problem Statement}
+  \GenesisCornerLogo
+  \begin{beamercolorbox}[rounded=true,sep=0.35cm,wd=\dimexpr\textwidth-0.7cm\relax]{block body}
+    \textbf{Thermally-Managed Solid-State Battery Module with Embedded Micro-Sensors.}
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  \begin{itemize}
+    \item During DC fast-charging, cells heat unevenly and hot spots form at cell interfaces and tabs, where pack-level cooling cannot reach in time.
+    \item Many packs rely on sparse, module-level temperature sensing, so local cell-to-cell differences can go unnoticed until they grow large \src{Liu et al., 2019}.
+    \item The aim is a battery module that links per-cell micro-sensing to targeted cooling. The first demonstrator uses conventional lithium-ion cells to validate the thermal-control architecture; solid-state compatibility is a future research objective, not a demonstrated capability.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 2: PROBLEM UNDERSTANDING
+% ============================================================
+\section{Problem Understanding}
+\begin{frame}{Problem Understanding}
+  \GenesisCornerLogo
+  \begin{itemize}
+    \item \textbf{Who is affected:} EV owners and fleet operators (cabs, delivery vehicles, buses) that fast-charge frequently, and the manufacturers who design and validate battery thermal systems.
+    \item \textbf{Root causes:} uneven current distribution, differences in cell internal resistance, and limited heat paths between cells; resistive heating scales with current squared ($I^2R$), so faster charging sharply raises heat.
+    \item \textbf{Consequences:} cells age unevenly and the weakest cell limits pack life; the BMS throttles charging power as a precaution, and the risk of thermal runaway rises \src{Zhang et al., 2022}.
+    \item \textbf{Why now:} high-power DC charging (of the order of 150~kW) is becoming common, and a commonly cited operating window for conventional lithium-ion is roughly 25--40~\textdegree C, with cell-to-cell spread kept within a few degrees as an engineering target; the exact limits depend on cell chemistry, construction and charge rate \src{Akbarzadeh et al., 2021}.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 3: EXISTING GAPS & CHALLENGES
+% ============================================================
+\section{Existing Gaps \& Challenges}
+\begin{frame}{Existing Gaps \& Challenges}
+  \GenesisCornerLogo
+  \begin{itemize}
+    \item \textbf{Sparse sensing:} where sensing is placed only at selected module locations, hot spots at cell interfaces and tabs can be detected late; cell-level monitoring remains an active research area \src{Liu et al., 2019}.
+    \item \textbf{Uniform cooling:} cold plates and cooling ribbons tend to cool the whole pack with little local control, and air cooling is limited at fast-charge heat loads \src{Zhang et al., 2022; Xia et al., 2017}.
+    \item \textbf{Passive buffering limits:} phase change materials help with uniformity but suffer from low thermal conductivity, latent-heat saturation and leakage \src{Goli et al., 2014}.
+    \item \textbf{Largely reactive control:} many conventional systems raise cooling toward peak power once thresholds are approached; the proposed design should be compared against a clearly defined baseline controller.
+    \item \textbf{Opportunity:} low-cost systems that tightly couple per-cell sensing to targeted cooling in real time are not yet common in production (subject to market and prior-art review).
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 4: OUR PROPOSED SOLUTION
+% ============================================================
+\section{Our Proposed Solution}
+\begin{frame}{Our Proposed Solution}
+  \GenesisCornerLogo
+  \begin{itemize}
+    \item \textbf{Core idea:} a battery-module enclosure that combines a mini-channel liquid cold plate, intended to be divided into independently addressable cooling zones, with a per-cell temperature micro-sensor array.
+    \item \textbf{How it works:} the micro-sensors map cell temperatures in near real time; a controller is intended to route more coolant to the hottest zones while keeping the rest at a low-power baseline.
+    \item \textbf{Hybrid buffering:} a graphene-enhanced phase change material layer is proposed between the cells and the cold plate to absorb short, high-rate thermal peaks \src{Goli et al., 2014; Hussain et al., 2018}.
+  \end{itemize}
+  \vspace{0.1cm}
+  \begin{beamercolorbox}[rounded=true,sep=0.2cm,wd=\dimexpr\textwidth-0.5cm\relax]{block body}
+    \small\textbf{Central testable proposition:} can closed-loop, zone-specific coolant control, informed by distributed sensing and supported by a PCM buffer, reduce peak temperature and total cooling energy versus conventional uniform cooling under the same heat load?
+  \end{beamercolorbox}
+\end{frame}
+
+% ============================================================
+% SLIDE 5: TECHNICAL APPROACH
+% ============================================================
+\section{Technical Approach}
+\begin{frame}{Technical Approach}
+  \GenesisCornerLogo
+  \begin{center}
+  \includegraphics[scale=0.1]{reference_logos/001.jpeg}
+  \end{center}
+  
+  \hspace{0.7cm}%
+  
+  \begin{center}
+    \scriptsize To be specified: sensor sampling rate, control interval, thresholds and hysteresis, flow feedback, and fail-safe behaviour on sensor or valve failure. Independent zonal control also requires a defined hydraulic schematic, valve specifications and pump curve, since opening one valve can change flow in other branches.
+  \end{center}
+  \vspace{0.05cm}
+  \begin{beamercolorbox}[rounded=true,sep=0.2cm,wd=\dimexpr\textwidth-0.5cm\relax]{block body}
+    \scriptsize\textbf{Tech Stack}\par\vspace{0.06cm}
+    \begin{tabular}{@{}p{0.46\textwidth}p{0.46\textwidth}@{}}
+      \textbf{Hardware:} 4--6 Li-ion cells (stand-in for solid-state), mini-channel cold plate, thermistor/RTD micro-sensor array, micro-valves, film heaters to emulate fast-charge heat &
+      \textbf{Controller:} ESP32/Arduino with zone-wise logic; small pump, tubing and water--glycol coolant \\[0.08cm]
+      \textbf{Software:} SolidWorks/Fusion CAD; ANSYS/COMSOL thermal--CFD &
+      \textbf{Modelling:} Python/MATLAB data logging and a lumped thermal model \\
+    \end{tabular}
+  \end{beamercolorbox}
+\end{frame}
+
+% ============================================================
+% SLIDE 6: INNOVATION & UNIQUENESS
+% ============================================================
+\section{Innovation \& Uniqueness}
+\begin{frame}{Innovation \& Uniqueness}
+  \GenesisCornerLogo
+  \parbox{\textwidth}{\scriptsize Figures below are published results under each study's specific conditions; whether they transfer to the proposed module is still to be tested.}
+  \vspace{0.12cm}
+  \begin{itemize}
+    \item \textbf{Per-cell, in-situ sensing} instead of sparse module-level readings, to detect hot spots earlier \src{Liu et al., 2019}.
+    \item \textbf{Zonal, micro-valved cooling} aims to direct coolant where heat is; a hybrid liquid-plus-PCM cold plate cut pumping energy by up to about 30\% versus a conventional aluminium plate in its own design and test conditions \src{Akbarzadeh et al., 2021}.
+    \item \textbf{Graphene-enhanced PCM buffer:} graphene raised PCM thermal conductivity by more than two orders of magnitude as a material property \src{Goli et al., 2014}; graphene-coated nickel foam with paraffin lowered cell surface-temperature rise by about 17\% relative to nickel foam at a 1.7~A discharge \src{Hussain et al., 2018}.
+    \item \textbf{Intended differentiator (to be validated):} one low-cost module that couples per-cell sensing to targeted cooling; novelty is to be established against defined baselines and a prior-art review.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 7: FEASIBILITY & SCALABILITY
+% ============================================================
+\section{Feasibility \& Scalability}
+\begin{frame}{Feasibility \& Scalability}
+  \GenesisCornerLogo
+  \begin{itemize}
+    \item \textbf{Feasibility:} the demonstrator can be built from off-the-shelf parts with lab access and a mentor; prior work reports distributed forced convection as a cost-effective route to uniform temperature \src{Karimi and Li, 2013} and hybrid liquid-plus-PCM plates tested experimentally \src{Akbarzadeh et al., 2021}.
+    \item \textbf{Validation path:} first in thermal--CFD simulation, then on a small 4--6 cell module, compared against conventional uniform-flow cooling at the same heat input, measuring cooling energy and not only temperature.
+    \item \textbf{Success criteria (provisional targets):} tighter cell-to-cell spread and lower peak temperature at equal or lower cooling energy than the baseline.
+    \item \textbf{Scalability:} the zoned module is intended to be modular; a small demonstrator does not by itself establish vehicle-pack scalability, durability, serviceability or safety, which require further work.
+    \item \textbf{Risks and mitigations:} per-cell wiring cost and failure points (multiplexed or flexible printed-circuit arrays); PCM leakage (shape-stabilised or composite PCM); coolant sealing and service access.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 8: COST FOR PRODUCT
+% ============================================================
+\section{Cost for Product}
+\begin{frame}{Cost for Product (Revised, Indicative)}
+  \GenesisCornerLogo
+  \vspace{-0.05cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.60\textwidth}
+      \scriptsize
+      \renewcommand{\arraystretch}{1.12}
+      \begin{tabular}{@{}p{0.70\textwidth}>{\raggedleft\arraybackslash}p{0.26\textwidth}@{}}
+        \textbf{Component / expense} & \textbf{Estimate} \\[1pt]
+        \hline
+        4--6 cells, holders and enclosure & Rs.~4{,}000--6{,}000 \\
+        Mini-channel cold plate: fabrication and leak testing & Rs.~7{,}000--12{,}000 \\
+        Pump, tubing, fittings and coolant & Rs.~3{,}000--5{,}000 \\
+        Temperature sensor array, ESP32 and electronics & Rs.~4{,}000--7{,}000 \\
+        Micro-valves and valve-driver circuits & Rs.~2{,}000--4{,}000 \\
+        Graphene-enhanced PCM and containment & Rs.~3{,}000--6{,}000 \\
+        Film heaters, wiring and consumables & Rs.~2{,}000--3{,}000 \\
+        Power supply, fuses and safety provisions & Rs.~2{,}000--4{,}000 \\
+        Reference sensors, flow measurement and data acquisition & Rs.~4{,}000--8{,}000 \\
+        Assembly, calibration and testing & Rs.~3{,}000--6{,}000 \\
+        \hline
+        \textbf{Subtotal} & \textbf{Rs.~34{,}000--61{,}000} \\
+        Contingency (approximately 10\%) & Rs.~3{,}400--6{,}100 \\
+        \textbf{Estimated total} & \textbf{Rs.~37{,}400--67{,}100} \\
+      \end{tabular}
+    \end{column}
+    \begin{column}{0.37\textwidth}
+      \begin{beamercolorbox}[rounded=true,sep=0.25cm,wd=\textwidth]{block body}
+        \small\textbf{Proposed working budget}\par\vspace{0.08cm}
+        {\Large\textbf{Rs.~52,000}}\par\vspace{0.08cm}
+        \scriptsize for an instrumented 4--6-cell laboratory demonstrator\par\vspace{0.14cm}
+        \scriptsize Hardware and thermal-management components: Rs.~30{,}000\par
+        \scriptsize Instrumentation, calibration and testing: Rs.~14{,}000\par
+        \scriptsize Assembly, consumables and contingency: Rs.~8{,}000\par\vspace{0.14cm}
+        \scriptsize Planning range approximately Rs.~40{,}000--67{,}000.
+      \end{beamercolorbox}
+    \end{column}
+  \end{columns}
+  \vspace{0.12cm}
+  \begin{center}
+    \scriptsize A preliminary engineering estimate, not a verified supplier quotation. Rs.~52{,}000 is a selected planning budget, not the midpoint of the range; the final cost depends on supplier quotations, access to shared laboratory equipment and the selected PCM formulation.
+  \end{center}
+\end{frame}
+
+% ============================================================
+% SLIDE 9: USE CASES
+% ============================================================
+\section{Use Cases}
+\begin{frame}{Use Cases {\normalsize\mdseries (compulsorily 3 use cases must be there)}}
+  \GenesisCornerLogo
+  \begin{itemize}
+    \item \textbf{Use case 1 --- Fast-charging fleet vehicles:} taxis, delivery vans and buses that fast-charge several times a day; targeted cooling is intended to hold the cell-to-cell spread tight across repeated DC fast charges, with the aim of extending pack life and reducing downtime (potential outcomes, to be validated).
+    \item \textbf{Use case 2 --- Manufacturer validation rig:} battery-pack makers could use the per-cell sensing and zonal cooling module as a test platform to study thermal behaviour of new cell formats, including pilot solid-state cells.
+    \item \textbf{Use case 3 --- High-ambient, high-C-rate operation:} vehicles in hot climates or at high discharge rates; proactive zonal cooling aims to limit local hot spots and reduce precautionary throttling of charge or discharge power.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 10: IMPACTS AND BENEFITS
+% ============================================================
+\section{Impacts and Benefits}
+\begin{frame}{Impacts and Benefits}
+  \GenesisCornerLogo
+  \parbox{\textwidth}{\scriptsize The items below are expected benefits contingent on validation, not outcomes demonstrated by the prototype.}
+  \vspace{0.12cm}
+  \begin{itemize}
+    \item \textbf{For users:} aims to enable faster charging and longer battery life, which would lower the cost per kilometre for drivers and fleets.
+    \item \textbf{For manufacturers:} potential for fewer warranty claims from uneven aging, and a thermal-control architecture that could inform future solid-state packs.
+    \item \textbf{Safety framing:} the system aims to improve thermal monitoring and temperature control; lowering peak temperature and improving uniformity supports safety but does not, by itself, demonstrate prevention of thermal runaway.
+    \item \textbf{Projected targets (to be validated):} cell-to-cell spread within about 5~\textdegree C and peak temperature below about 40~\textdegree C during fast-charge-like loads, at equal or lower cooling energy than uniform cooling \src{cf. Akbarzadeh et al., 2021}.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% SLIDE 11: SUSTAINABLE DEVELOPMENT GOALS
+% ============================================================
+\section{Sustainable Development Goals}
+\begin{frame}{Sustainable Development Goals (SDGs)}
+  \GenesisCornerLogo
+  \begin{GenesisTable}{C{1.6cm}|C{1.9cm}|L{2.5cm}|L{3.3cm}}
+    \GenesisHeadRow
+    \GenesisHead{SDG Number} & \GenesisHead{Target} & \GenesisHead{Goal Name} & \GenesisHead{Connection} \\ \hline
+    \GenesisRowA
+    \textbf{SDG~7} & Target 7.3 & Affordable and Clean Energy & Aims to cut parasitic pack cooling energy \\ \hline
+    \GenesisRowB
+    \textbf{SDG~9} & Target 9.4 & Industry, Innovation and Infrastructure & Efficient battery thermal technology \\ \hline
+    \GenesisRowA
+    \textbf{SDG~11} & Target 11.6 & Sustainable Cities and Communities & Indirect: depends on EV adoption and grid mix \\ \hline
+    \GenesisRowB
+    \textbf{SDG~13} & Target 13.2 & Climate Action & Indirect: supports transport decarbonisation \\
+  \end{GenesisTable}
+  \begin{center}\scriptsize SDG links indicate strategic alignment, not a measured environmental benefit.\end{center}
+\end{frame}
+
+% ============================================================
+% SLIDE 12: INDIVIDUAL MEMBER CONTRIBUTION
+% ============================================================
+\section{Individual Member Contribution}
+\begin{frame}{Individual Member Contribution}
+  \GenesisCornerLogo
+  \begin{GenesisTable}{C{4.2cm}|L{5.4cm}}
+    \GenesisHeadRow
+    \GenesisHead{Member} & \GenesisHead{Contribution or responsibility} \\ \hline
+    \GenesisRowA
+    \textbf{G A Yuvan} & Cost research, use-case identification and impact study \\ \hline
+    \GenesisRowB
+    \textbf{Manu K} & Problem research and understanding, SDG identification \\ \hline
+    \GenesisRowA
+    \textbf{Kousik Kumar} & Research-gap identification, solution proposal and refining the technical approach \\ \hline
+    \GenesisRowB
+    \textbf{Harshitha Kothandam Sasikumar} & Innovation possibilities and feasibility study \\
+  \end{GenesisTable}
+\end{frame}
+
+% ============================================================
+% LAST SLIDE: YUKTI ID
+% ============================================================
+\begin{frame}{Yukti ID}
+  \GenesisCornerLogo
+  \begin{center}
+    \GenesisIDCard{Yukti ID}{[IR2026-1051050]}
+  \end{center}
+\end{frame}
+
+\end{document}
